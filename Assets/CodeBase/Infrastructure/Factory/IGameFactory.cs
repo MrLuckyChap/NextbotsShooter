@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace CodeBase.Infrastructure.Factory
     Task<GameObject> CreateHud();
     Task<GameObject> CreateGameObject(GameObject prefab);
     Task<GameObject> CreateGameObject(GameObject prefab, Vector3 position, Quaternion rotation);
+    Task<List<GameObject>> CreateGameObjects(GameObject prefab, Vector3 position, Quaternion rotation, int count);
     GameObject PlayerGameObject { get; }
   }
 }

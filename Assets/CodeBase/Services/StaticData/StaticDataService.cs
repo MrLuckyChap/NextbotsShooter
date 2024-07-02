@@ -7,19 +7,26 @@ namespace CodeBase.Services.StaticData
 {
   public class StaticDataService : IStaticDataService
   {
-    private const string LevelsDataPath = "StaticData/Levels";
+    public AllLevelsData AllLevelsData => _allLevels;
 
-    private Dictionary<int, LevelStaticData> _levels;
+    private const string LevelsDataPath = "Data/Levels";
+    private const string AllLevelsDataPath = "Data/AllLevelsData";
+
+    private Dictionary<int, LevelData> _levels;
+    private AllLevelsData _allLevels;
 
     public void Load()
     {
       _levels = Resources
-        .LoadAll<LevelStaticData>(LevelsDataPath)
+        .LoadAll<LevelData>(LevelsDataPath)
         .ToDictionary(x => x.LevelNumber, x => x);
+
+      _allLevels = Resources
+        .Load<AllLevelsData>(AllLevelsDataPath);
     }
 
-    public LevelStaticData ForLevel(int level) =>
-      _levels.TryGetValue(level, out LevelStaticData staticData)
+    public LevelData ForLevel(int level) =>
+      _levels.TryGetValue(level, out LevelData staticData)
         ? staticData
         : null;
   }

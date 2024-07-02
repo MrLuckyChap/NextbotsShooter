@@ -4,7 +4,8 @@ namespace CodeBase.Services.StaticData
 {
   public interface IStaticDataService
   {
+    AllLevelsData AllLevelsData { get; }
     void Load();
-    LevelStaticData ForLevel(int level);
+    LevelData ForLevel(int level);
   }
 }

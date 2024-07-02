@@ -6,8 +6,13 @@ namespace CodeBase.Services.Level
   {
     public event Action LevelCompleted;
     public event Action LastLevelPointPassed;
-    
+    public event Action PlayButtonClicked;
+
     public void NotifyListenersAboutPassedLastPoint() => LastLevelPointPassed?.Invoke();
     public void RestartLevel() => LevelCompleted?.Invoke();
+    public void StartLevel()
+    {
+      PlayButtonClicked?.Invoke();
+    }
   }
 }

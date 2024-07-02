@@ -1,7 +1,13 @@
 using System.Threading.Tasks;
-using CodeBase.CameraLogic;
+using AMFPC.Camera.Scripts;
+using AMFPC.Enemy.Scripts;
+using AMFPC.First_Person_Items___Arms.Scripts;
+using AMFPC.Input.Scripts;
+using AMFPC.Interactables;
+using AMFPC.Player_Controller.Scripts;
+using AMFPC.UI.Scripts;
 using CodeBase.Infrastructure.Factory;
-using CodeBase.Infrastructure.StaticData;
+using CodeBase.MovementGround;
 using CodeBase.Services.StaticData;
 using UnityEngine;
 
@@ -28,14 +34,19 @@ namespace CodeBase.Infrastructure.States
     public void Enter(string sceneName)
     {
       _loadingCurtain.Show();
+      Debug.Log("Testing LoadLevelState Enter");
       _sceneLoader.Load(sceneName, OnLoaded);
     }
 
-    public void Exit() =>
+    public void Exit()
+    {
       _loadingCurtain.Hide();
+      Debug.Log("Testing LoadLevelState Exit");
+    }
 
     private async void OnLoaded()
     {
+      Debug.Log("Testing LoadLevelState OnLoaded Start");
       _dataService.Load();
       await InitGameWorld();
 
@@ -45,30 +56,99 @@ namespace CodeBase.Infrastructure.States
     private async Task InitGameWorld()
     {
       GameObject level = await InitLocation();
+      level.GetComponent<Ground>().UpdateNavMesh(_dataService.ForLevel(1).NavMeshData);
       AISpawner aiSpawner = level.GetComponent<AISpawner>();
-      GameObject player = await InitPlayer(aiSpawner);
+      aiSpawner.Init();
+      PlayerController playerController = await InitPlayer(aiSpawner);
+      GameObject playerCamera = await InitPlayerCamera(playerController.transform.position);
+      InputManager inputManager = await InitInputManager();
+      ItemManager itemManager = playerCamera.GetComponentInChildren<ItemManager>();
+      GameObject gameHud = await InitGameHud();
       await InitEnemies(aiSpawner);
-      GameObject hud = await InitHud();
-      // CameraFollow(player);
+      await InitWeapons(aiSpawner, itemManager);
+
+      playerController.inputManager = inputManager;
+      playerController.GetComponent<PlayerRespawn>().AISpawner = aiSpawner;
+      UIManager uiManager = gameHud.GetComponentInChildren<UIManager>();
+      playerCamera.GetComponentInChildren<CameraRayCast>().UIReference = uiManager;
+      playerCamera.GetComponentInChildren<CameraLook>().PlayerController = playerController;
+      itemManager.playerController = playerController;
+      itemManager.UIReference = uiManager;
+      Debug.Log("Testing LoadLevelState InitGameWorld Complete");
     }
+
+
+    // private void SetPlayerPosition(Vector3 spawnPosition)
+    // {
+    //   GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().transform.position = spawnPosition;
+    // }
 
     private async Task<GameObject> InitLocation() => await _gameFactory.CreateGameObject(_dataService.ForLevel(1).Location);
 
-    private async Task<GameObject> InitPlayer(AISpawner aiSpawner) =>
-      await _gameFactory.CreatePlayer(aiSpawner.GetPointsForInstantiate());
+    private async Task<PlayerController> InitPlayer(AISpawner aiSpawner)
+    {
+      Vector3 spawnPoint = aiSpawner.GetPointForInstantiate();
+      spawnPoint.y += 1f;
+      GameObject playerController = await _gameFactory.CreateGameObject(
+        _dataService.AllLevelsData.PlayerController, spawnPoint,
+        new Quaternion(0f, 0f, 0f, 0f));
+      // var transformPosition = playerController.transform.position;
+      // transformPosition.y += 20f;
+      return playerController.GetComponent<PlayerController>();
+    }
+
+    private async Task<GameObject> InitPlayerCamera(Vector3 playerPosition) => await _gameFactory.CreateGameObject(
+      _dataService.AllLevelsData.PlayerCamera, playerPosition, new Quaternion(0f, 0f, 0f, 0f));
 
     private async Task InitEnemies(AISpawner aiSpawner)
     {
       for (int i = 0; i < _dataService.ForLevel(1).EnemyCount; i++)
-        await _gameFactory.CreateGameObject(_dataService.ForLevel(1).Enemy[0], aiSpawner.GetPointsForInstantiate(),
-          new Quaternion(0f, 180f, 0f, 0f));
+      {
+        var gameObject = _gameFactory.CreateGameObject(_dataService.ForLevel(1).Enemy[0], aiSpawner.GetPointForInstantiate(),
+          new Quaternion(0f, 0f, 0f, 0f));
+        gameObject.Result.GetComponent<EnemyController>().Init(aiSpawner);
+        await gameObject;
+      }
+
       // foreach (EnemySpawnPositions points in _dataService.ForLevel(1).EnemySpawnPositions)
       //   foreach (Vector3 position in points.Positions)
-      //     await _gameFactory.CreateGameObject(_dataService.ForLevel(1).Enemy, position, new Quaternion(0f, 180f, 0f, 0f));
+      //     await _gameFactory.CreateGameObjects(_dataService.ForLevel(1).Enemy, position, new Quaternion(0f, 180f, 0f, 0f));
     }
 
-    private async Task<GameObject> InitHud() => await _gameFactory.CreateHud();
-    
-    private void CameraFollow(GameObject player) => Camera.main.GetComponent<FirstPersonCamera>().Follow(player);
+    private async Task<InputManager> InitInputManager()
+    {
+      GameObject inputManager = await _gameFactory.CreateGameObject(_dataService.AllLevelsData.InputManager);
+      return inputManager.GetComponent<InputManager>();
+    }
+
+    private async Task<GameObject> InitGameHud()
+    {
+      return await _gameFactory.CreateGameObject(_dataService.AllLevelsData.GameHud);
+    }
+
+    private async Task InitWeapons(AISpawner aiSpawner, ItemManager itemManager)
+    {
+     GameObject weapon = await _gameFactory.CreateGameObject(
+        _dataService.AllLevelsData.AK47, aiSpawner.GetPointForInstantiate(),
+        new Quaternion(0f, 0f, 0f, 0f));
+     weapon.GetComponent<PickupItem>().ItemManager = itemManager;
+     
+     GameObject weapon1 = await _gameFactory.CreateGameObject(
+       _dataService.AllLevelsData.AK47, aiSpawner.GetPointForInstantiate(),
+       new Quaternion(0f, 0f, 0f, 0f));
+     weapon1.GetComponent<PickupItem>().ItemManager = itemManager;
+     
+     GameObject ammo = await _gameFactory.CreateGameObject(
+        _dataService.AllLevelsData.AKAmmo, aiSpawner.GetPointForInstantiate(),
+        new Quaternion(0f, 0f, 0f, 0f));
+     ammo.GetComponent<PickupItem>().ItemManager = itemManager;
+     
+     GameObject ammo1 = await _gameFactory.CreateGameObject(
+       _dataService.AllLevelsData.AKAmmo, aiSpawner.GetPointForInstantiate(),
+       new Quaternion(0f, 0f, 0f, 0f));
+     ammo1.GetComponent<PickupItem>().ItemManager = itemManager;
+    }
+
+    // private void CameraFollow(GameObject player) => Camera.main.GetComponent<FirstPersonCamera>().Follow(player);
   }
 }

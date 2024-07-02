@@ -17,7 +17,8 @@ namespace CodeBase.Infrastructure.States
     {
       _states = new Dictionary<Type, IExitableState>
       {
-        [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
+        [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, loadingCurtain),
+        [typeof(MenuState)] = new MenuState(this, sceneLoader, loadingCurtain, levelService),
         [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, gameFactory, dataService),
         [typeof(GameState)] = new GameState(this, levelService),
       };

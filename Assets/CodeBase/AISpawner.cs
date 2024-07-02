@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+using CodeBase.MovementGround;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,70 +7,97 @@ namespace CodeBase
 {
   public class AISpawner : MonoBehaviour
   {
-    // Префаб объекта, который нужно инстанциировать
-    [SerializeField] private GameObject objectToSpawn;
+    [SerializeField] private float _minDistanceBetweenObjects = 2f;
+    [SerializeField] private Ground _ground;
+    [SerializeField] private LayerMask _collisionLayers;
+    private NavMeshTriangulation _triangulation;
 
-    // Ссылка на NavMeshData
-    [SerializeField] private NavMeshData navMeshData;
-
-
-    // Радиус вокруг точки спавна, в котором будет искаться точка на NavMesh
-    [SerializeField] private float spawnRadius = 5f;
-
-    // Минимальное расстояние между объектами
-    [SerializeField] private float minDistanceBetweenObjects = 2f;
-
-    // Метод для инстанциирования объектов
-    public Vector3 GetPointsForInstantiate()
+    public void Init()
+    {
+      // Получаем данные о треугольниках NavMesh
+      _triangulation = NavMesh.CalculateTriangulation();
+    }
+    
+    public Vector3 GetPointForInstantiate()
     {
       // List<Vector3> points = new List<Vector3>();
-      Vector3 randomPoint = GetRandomPointOnNavMesh(transform.position, spawnRadius);
+       Vector3 randomPoint = GetRandomPointOnNavMesh();
       if (IsOverlappingOtherObjects(randomPoint))
       {
-        GetPointsForInstantiate();
+        GetPointForInstantiate();
       }
-      
+      Debug.Log("Testing Point Find.");
       return randomPoint;
-      // for (int i = 0; i < spawnCount; i++)
-      // {
-      //     // Генерируем случайную точку на NavMesh с проверкой на перекрытие
-      //     randomPoint = GetRandomPointOnNavMesh(transform.position, spawnRadius);
-      //     
-      //     // Проверяем, не пересекается ли новый объект с уже существующими
-      //     if (IsOverlappingOtherObjects(randomPoint))
-      //     {
-      //         // Если пересекается, уменьшаем счетчик и пробуем снова
-      //         i--; 
-      //         continue;
-      //     }
-      //     // points.Add(randomPoint);
-      //     // Инстанциируем объект в случайной точке
-      //     // Instantiate(objectToSpawn, randomPoint, Quaternion.identity);
-      // }
     }
+    
+    
+    Vector3 GetRandomPointOnNavMesh()
+    {
+      // Выбираем случайный треугольник
+      int randomTriangleIndex = Random.Range(0, _triangulation.indices.Length / 3);
+      int[] triangleIndices = new int[] { 
+        _triangulation.indices[randomTriangleIndex * 3],
+        _triangulation.indices[randomTriangleIndex * 3 + 1],
+        _triangulation.indices[randomTriangleIndex * 3 + 2] 
+      };
+
+      // Получаем вершины треугольника
+      Vector3 vertex0 = _triangulation.vertices[triangleIndices[0]];
+      Vector3 vertex1 = _triangulation.vertices[triangleIndices[1]];
+      Vector3 vertex2 = _triangulation.vertices[triangleIndices[2]];
+
+      // Генерируем случайную точку внутри треугольника
+      float u = Random.Range(0f, 1f);
+      float v = Random.Range(0f, 1f);
+      if (u + v > 1f)
+      {
+        u = 1f - u;
+        v = 1f - v;
+      }
+
+      Vector3 randomPoint = vertex0 + (vertex1 - vertex0) * u + (vertex2 - vertex0) * v;
+
+      return randomPoint;
+    }
+
 
     // Метод для получения случайной точки на NavMesh
-    Vector3 GetRandomPointOnNavMesh(Vector3 center, float radius)
-    {
-      for (int i = 0; i < 10; i++) // Попытки найти точку
-      {
-        Vector3 randomPoint = Random.insideUnitSphere * radius + center;
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPoint, out hit, radius, NavMesh.AllAreas))
-        {
-          return hit.position;
-        }
-      }
-
-      Debug.LogWarning("Не удалось найти точку на NavMesh после 10 попыток.");
-      return center; // Возвращаем центр, если не удалось найти
-    }
+    // Vector3 GetRandomPointOnNavMesh()
+    // {
+    //   
+    //   // Получаем границы NavMesh
+    //   Bounds navMeshBounds = _ground.NavMeshSurface.navMeshData.sourceBounds;
+    //
+    //   for (int i = 0; i < 10; i++)
+    //   {
+    //     // Генерируем случайную точку внутри границ
+    //     Vector3 randomPoint = new Vector3(
+    //       Random.Range(navMeshBounds.min.x, navMeshBounds.max.x),
+    //       navMeshBounds.center.y,
+    //       Random.Range(navMeshBounds.min.z, navMeshBounds.max.z)
+    //     );
+    //
+    //     // Проверяем, находится ли точка на NavMesh
+    //     NavMeshHit hit;
+    //     if (NavMesh.SamplePosition(randomPoint, out hit, 10f, _ground.gameObject.layer))
+    //     {
+    //       return hit.position;
+    //     }
+    //
+    //   }
+    //
+    //   Debug.LogWarning("Testing Don't find point after 10 steps.");
+    //   return Vector3.zero;
+    // }
 
     // Метод для проверки перекрытия с другими объектами
     bool IsOverlappingOtherObjects(Vector3 point)
     {
       // Используем OverlapSphere для проверки на перекрытие
-      Collider[] colliders = Physics.OverlapSphere(point, minDistanceBetweenObjects);
+      Collider[] colliders = Physics.OverlapSphere(point, _minDistanceBetweenObjects, _collisionLayers);
+      // if ((layerMask.value & (1 << obj.gameObject.layer)) != 0)
+      // {
+      // }
       // Если найдены коллайдеры (кроме самого объекта спавна), то есть перекрытие
       return colliders.Length > 0;
     }
