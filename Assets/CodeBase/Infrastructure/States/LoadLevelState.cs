@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
-using AMFPC.Camera.Scripts;
-using AMFPC.Enemy.Scripts;
-using AMFPC.First_Person_Items___Arms.Scripts;
-using AMFPC.Input.Scripts;
-using AMFPC.Interactables;
-using AMFPC.Player_Controller.Scripts;
-using AMFPC.UI.Scripts;
+using All_Imported_Assets.AMFPC.Camera.Scripts;
+using All_Imported_Assets.AMFPC.Enemy.Scripts;
+using All_Imported_Assets.AMFPC.First_Person_Items___Arms.Scripts;
+using All_Imported_Assets.AMFPC.Input.Scripts;
+using All_Imported_Assets.AMFPC.Interactables;
+using All_Imported_Assets.AMFPC.Player_Controller.Scripts;
+using All_Imported_Assets.AMFPC.UI.Scripts;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.MovementGround;
 using CodeBase.Services.StaticData;
@@ -131,22 +131,27 @@ namespace CodeBase.Infrastructure.States
      GameObject weapon = await _gameFactory.CreateGameObject(
         _dataService.AllLevelsData.AK47, aiSpawner.GetPointForInstantiate(),
         new Quaternion(0f, 0f, 0f, 0f));
-     weapon.GetComponent<PickupItem>().ItemManager = itemManager;
+     weapon.GetComponentInChildren<PickupItem>().ItemManager = itemManager;
      
      GameObject weapon1 = await _gameFactory.CreateGameObject(
        _dataService.AllLevelsData.AK47, aiSpawner.GetPointForInstantiate(),
        new Quaternion(0f, 0f, 0f, 0f));
-     weapon1.GetComponent<PickupItem>().ItemManager = itemManager;
+     weapon1.GetComponentInChildren<PickupItem>().ItemManager = itemManager;
      
-     GameObject ammo = await _gameFactory.CreateGameObject(
-        _dataService.AllLevelsData.AKAmmo, aiSpawner.GetPointForInstantiate(),
-        new Quaternion(0f, 0f, 0f, 0f));
-     ammo.GetComponent<PickupItem>().ItemManager = itemManager;
-     
-     GameObject ammo1 = await _gameFactory.CreateGameObject(
-       _dataService.AllLevelsData.AKAmmo, aiSpawner.GetPointForInstantiate(),
+     GameObject weapon2 = await _gameFactory.CreateGameObject(
+       _dataService.AllLevelsData.AK47, aiSpawner.GetPointForInstantiate(),
        new Quaternion(0f, 0f, 0f, 0f));
-     ammo1.GetComponent<PickupItem>().ItemManager = itemManager;
+     weapon2.GetComponentInChildren<PickupItem>().ItemManager = itemManager;
+     
+     GameObject weapon3 = await _gameFactory.CreateGameObject(
+       _dataService.AllLevelsData.AK47, aiSpawner.GetPointForInstantiate(),
+       new Quaternion(0f, 0f, 0f, 0f));
+     weapon3.GetComponentInChildren<PickupItem>().ItemManager = itemManager;
+     
+     // GameObject ammo = await _gameFactory.CreateGameObject(
+     //    _dataService.AllLevelsData.AKAmmo, aiSpawner.GetPointForInstantiate(),
+     //    new Quaternion(0f, 0f, 0f, 0f));
+     // ammo.GetComponent<PickupItem>().ItemManager = itemManager;
     }
 
     // private void CameraFollow(GameObject player) => Camera.main.GetComponent<FirstPersonCamera>().Follow(player);

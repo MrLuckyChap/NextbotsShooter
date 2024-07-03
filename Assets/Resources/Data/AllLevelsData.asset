@@ -19,5 +19,5 @@ MonoBehaviour:
   InputManager: {fileID: 8328386122561614742, guid: c81d4290c21cb9c46993970ed37ad3b5,
     type: 3}
   GameHud: {fileID: 2611663746014033752, guid: 34167e250ee80b9449911899cc7cc843, type: 3}
-  AK47: {fileID: 8685627819349927130, guid: 1dc74944f20a78d4c88ed81c54fc25f0, type: 3}
+  AK47: {fileID: 2401729316576802488, guid: d1fbd3586f03f4c5bb665984ccb93c3d, type: 3}
   AKAmmo: {fileID: 7262116614666456261, guid: b2d7d85603d784b258091d4d59880674, type: 3}
