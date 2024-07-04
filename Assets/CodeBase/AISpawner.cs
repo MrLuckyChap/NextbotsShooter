@@ -26,7 +26,7 @@ namespace CodeBase
       {
         GetPointForInstantiate();
       }
-      Debug.Log("Testing Point Find.");
+      // Debug.Log("Testing Point Find.");
       return randomPoint;
     }
     
@@ -59,36 +59,6 @@ namespace CodeBase
 
       return randomPoint;
     }
-
-
-    // Метод для получения случайной точки на NavMesh
-    // Vector3 GetRandomPointOnNavMesh()
-    // {
-    //   
-    //   // Получаем границы NavMesh
-    //   Bounds navMeshBounds = _ground.NavMeshSurface.navMeshData.sourceBounds;
-    //
-    //   for (int i = 0; i < 10; i++)
-    //   {
-    //     // Генерируем случайную точку внутри границ
-    //     Vector3 randomPoint = new Vector3(
-    //       Random.Range(navMeshBounds.min.x, navMeshBounds.max.x),
-    //       navMeshBounds.center.y,
-    //       Random.Range(navMeshBounds.min.z, navMeshBounds.max.z)
-    //     );
-    //
-    //     // Проверяем, находится ли точка на NavMesh
-    //     NavMeshHit hit;
-    //     if (NavMesh.SamplePosition(randomPoint, out hit, 10f, _ground.gameObject.layer))
-    //     {
-    //       return hit.position;
-    //     }
-    //
-    //   }
-    //
-    //   Debug.LogWarning("Testing Don't find point after 10 steps.");
-    //   return Vector3.zero;
-    // }
 
     // Метод для проверки перекрытия с другими объектами
     bool IsOverlappingOtherObjects(Vector3 point)

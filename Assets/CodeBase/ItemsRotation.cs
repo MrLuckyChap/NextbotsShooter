@@ -5,7 +5,9 @@ namespace CodeBase
   public class ItemsRotation : MonoBehaviour
   {
     [SerializeField] private GameObject _item;
-    [SerializeField] private float _speedRotation;
+    [SerializeField] private float _speedRotationX;
+    [SerializeField] private float _speedRotationY;
+    [SerializeField] private float _speedRotationZ;
 
     private bool _isRotate = true;
 
@@ -18,7 +20,18 @@ namespace CodeBase
     {
       if (!_isRotate) return;
 
-      _item.transform.Rotate(Vector3.forward * _speedRotation);
+      if (_speedRotationX != 0)
+      {
+        _item.transform.Rotate(Vector3.right * _speedRotationX);
+      }
+      if (_speedRotationY != 0)
+      {
+        _item.transform.Rotate(Vector3.up * _speedRotationY);
+      }
+      if (_speedRotationZ != 0)
+      {
+        _item.transform.Rotate(Vector3.forward * _speedRotationZ);
+      }
     }
   }
 }

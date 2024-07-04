@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using All_Imported_Assets.AMFPC.Scriptables_Objects.Items.Equipements;
 using All_Imported_Assets.AMFPC.Scriptables_Objects.Scripts;
 using UnityEngine;
 
@@ -33,7 +34,13 @@ namespace All_Imported_Assets.AMFPC.Scriptables_Objects.Inventory.Scripts
                 container.Add(new InventorySlot(_item, _amount));
             }
         }
+
+        public void RemoveItem(InventorySlot weaponSlot)
+        {
+          container.Remove(weaponSlot);
+        }
     }
+
     [System.Serializable]
     public class InventorySlot
     {

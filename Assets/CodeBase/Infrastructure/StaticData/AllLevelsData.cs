@@ -10,7 +10,7 @@ namespace CodeBase.Infrastructure.StaticData
     public GameObject InputManager;
     public GameObject GameHud;
     public GameObject AK47;
-    public GameObject AKAmmo;
+    public GameObject Shotgun;
     
   }
 }

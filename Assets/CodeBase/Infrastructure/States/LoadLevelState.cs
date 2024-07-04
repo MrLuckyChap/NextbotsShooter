@@ -144,9 +144,14 @@ namespace CodeBase.Infrastructure.States
      weapon2.GetComponentInChildren<PickupItem>().ItemManager = itemManager;
      
      GameObject weapon3 = await _gameFactory.CreateGameObject(
-       _dataService.AllLevelsData.AK47, aiSpawner.GetPointForInstantiate(),
+       _dataService.AllLevelsData.Shotgun, aiSpawner.GetPointForInstantiate(),
        new Quaternion(0f, 0f, 0f, 0f));
      weapon3.GetComponentInChildren<PickupItem>().ItemManager = itemManager;
+     
+     GameObject weapon4 = await _gameFactory.CreateGameObject(
+       _dataService.AllLevelsData.Shotgun, aiSpawner.GetPointForInstantiate(),
+       new Quaternion(0f, 0f, 0f, 0f));
+     weapon4.GetComponentInChildren<PickupItem>().ItemManager = itemManager;
      
      // GameObject ammo = await _gameFactory.CreateGameObject(
      //    _dataService.AllLevelsData.AKAmmo, aiSpawner.GetPointForInstantiate(),

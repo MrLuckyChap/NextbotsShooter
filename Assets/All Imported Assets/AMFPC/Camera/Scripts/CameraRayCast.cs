@@ -21,6 +21,7 @@ namespace All_Imported_Assets.AMFPC.Camera.Scripts
 
         void Start()
         {
+          Debug.Log("CameraRayCast");
             _camera = UnityEngine.Camera.main;
             _rayPosition = new Vector3(0.5f, 0.5f, 0);
             GetComponent<CameraLook>().inputManager.onInteractInputDown.AddListener(InteractInputDown);
