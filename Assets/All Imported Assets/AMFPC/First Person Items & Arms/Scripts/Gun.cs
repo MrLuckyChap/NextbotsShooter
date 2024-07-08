@@ -78,7 +78,7 @@ namespace All_Imported_Assets.AMFPC.First_Person_Items___Arms.Scripts
                 else
                 {
                     _firstPersonAim.canAim = true;
-                    weaponStats.RestoreMagazineCount(_weaponItem.maxMagazineSize);
+                    weaponStats.RestoreMagazineCount();
                     weaponStats.currentReloadTime = _weaponItem.reloadDuration;
                     reload = false;
                 }
