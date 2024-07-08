@@ -34,6 +34,7 @@ namespace All_Imported_Assets.AMFPC.First_Person_Items___Arms.Scripts
             {
                 magazineCount = ammoSlot.amount;
             }
+            //todo: fixed logic
             ammunitionCount = magazineCount;
             ammoSlot.AddAmount(-magazineCount);
         }

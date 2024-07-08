@@ -2,6 +2,7 @@
 using System.Linq;
 using All_Imported_Assets.AMFPC.First_Person_Items___Arms.Scripts;
 using All_Imported_Assets.AMFPC.Scriptables_Objects.Inventory.Scripts;
+using All_Imported_Assets.AMFPC.Scriptables_Objects.Items.Ammunition;
 using All_Imported_Assets.AMFPC.Scriptables_Objects.Items.Equipements;
 using All_Imported_Assets.AMFPC.Scriptables_Objects.Scripts;
 using All_Imported_Assets.AMFPC.Scripts.Interfaces;
@@ -24,6 +25,8 @@ namespace All_Imported_Assets.AMFPC.Interactables
 
         private void Awake()
         {
+
+
           _triggerObserver.TriggerEnter += TriggerEnter;
         }
 
@@ -48,6 +51,7 @@ namespace All_Imported_Assets.AMFPC.Interactables
                 {
                   AddAmmo();
                   _parentObject.SetActive(false);
+                  //todo: respawn weapom
                   return;
                 }
                 if (!_hasItem && showItemOnPickup)
@@ -65,7 +69,7 @@ namespace All_Imported_Assets.AMFPC.Interactables
                   }
                   ItemManager.SwitchToItem(item.FPItemIndex);
                   AddItemToInventory();
-
+                  //todo: respawn weapom
                   if (weaponSlot != null)
                   {
                     playerInventory.RemoveItem(weaponSlot);
@@ -78,11 +82,11 @@ namespace All_Imported_Assets.AMFPC.Interactables
 
         private void AddAmmo()
         {
-          if (totalAmount < pickAmount)
-          {
-            pickAmount = totalAmount;
-          }
-          totalAmount -= pickAmount;
+          // if (totalAmount < pickAmount)
+          // {
+          //   pickAmount = totalAmount;
+          // }
+          // totalAmount -= pickAmount;
           playerInventory.AddItem(Ammunition, pickAmount);
         }
 
@@ -110,7 +114,9 @@ namespace All_Imported_Assets.AMFPC.Interactables
           foreach (InventorySlot slot in playerInventory.container)
           {
             WeaponObject weapon = slot.item as WeaponObject;
+            AmmunitionObject ammo = slot.item as AmmunitionObject;
             if (weapon != null) playerInventory.RemoveItem(slot);
+            if (ammo != null) slot.amount = 0;
           }
         }
     }

@@ -25,5 +25,6 @@ namespace All_Imported_Assets.AMFPC.Player_Controller.Scripts
             }
         }
 
+        public void TakeDamage(int damage) => healthManager.Damage(damage);
     }
 }

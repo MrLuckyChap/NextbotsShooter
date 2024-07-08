@@ -1,12 +1,11 @@
 ﻿using All_Imported_Assets.AMFPC.Scripts;
-using All_Imported_Assets.AMFPC.Scripts.Interfaces;
 using CodeBase;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace All_Imported_Assets.AMFPC.Enemy.Scripts
 {
-    public class EnemyController : MonoBehaviour, IDamageable
+  public class EnemyController : MonoBehaviour
     {
         public Animator animator;
         public float respawnTime;
@@ -21,20 +20,30 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
         private Rigidbody[] rigidBodies;
         private Collider[] colliders;
         private AISpawner _aiSpawner;
+        private Transform _playerTransform;
+        [SerializeField] private float _rotationSpeed;
+        [SerializeField] private GameObject _objectRotateToPlayer;
+        [SerializeField] private AgentMoveToPlayer _agentMoveToPlayer;
+        [SerializeField] private Aggro _aggro;
 
         private void Awake()
         {
             rigidBodies = animator.gameObject.GetComponentsInChildren<Rigidbody>();
             colliders = animator.gameObject.GetComponentsInChildren<Collider>();
-            SetRagdoll(false);
+
+            _agentMoveToPlayer.PlayerCaught += OnPlayerCaught;
+            _aggro.PlayerEscaped += OnPlayerCaught;
+            // SetRagdoll(false);
         }
 
-        public void Init(AISpawner aiSpawner)
+        public void Init(AISpawner aiSpawner, Transform playerTransform)
         {
             _aiSpawner = aiSpawner;
+            _playerTransform = playerTransform;
+            _agentMoveToPlayer.Init(playerTransform);
         }
 
-        void Start()
+        private void Start()
         {
             enemyStats = GetComponent<EnemyStats>();
             healthManager = GetComponent<HealthManager>();
@@ -42,11 +51,18 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
             _currentRespawnTimer = respawnTime;
         }
 
-        void Update()
+        private void Update()
         {
+            if (_aggro.HasAggroTarget)
+            {
+              LookAtPlayer();
+              return;
+            }
+
             if(!dead)
             {
-                Chase();
+              Chase();
+              LookAtPlayer();
             }
 
             RespawnTimer();
@@ -71,7 +87,6 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
             {
                 GenerateDestinationPoint();
             }
-
         }
 
         public void GenerateDestinationPoint()
@@ -82,14 +97,14 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
                 generatedPoint = true;
                 _distinationSet = false;
             }
-
         }
 
         public void KillEnemy()
         {
             _agent.destination = transform.position;
             dead = true;
-            GetComponent<CapsuleCollider>().enabled = false;
+            gameObject.SetActive(false);
+            // GetComponent<CapsuleCollider>().enabled = false;
             SetRagdoll(true);
             animator.enabled = false;
         }
@@ -97,32 +112,40 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
         public void RespawnEnemy()
         {
             animator.enabled = true;
-            SetRagdoll(false);
+            gameObject.SetActive(true);
+            // SetRagdoll(false);
             dead = false;
             healthManager.RestoreHealth();
             generatedPoint = false;
             transform.position = _aiSpawner.GetPointForInstantiate();
-            GetComponent<CapsuleCollider>().enabled = true;
+            // GetComponent<CapsuleCollider>().enabled = true;
             healthManager.RestoreHealth();
             enemyStats.UpdateEnemyHealthUI();
         }
 
-        private void RespawnTimer()
+        private void LookAtPlayer()
         {
-            if(dead)
-            {
-                _currentRespawnTimer -= Time.deltaTime;
-                if (_currentRespawnTimer <= 0)
-                {
-                    RespawnEnemy();
-                    _currentRespawnTimer = respawnTime;
-                }
-            }
+          Vector3 directionToPlayer = _playerTransform.position - _objectRotateToPlayer.transform.position;
+          float angle = Mathf.Atan2(directionToPlayer.x, directionToPlayer.z) * Mathf.Rad2Deg;
+          _objectRotateToPlayer.transform.rotation = Quaternion.Slerp(_objectRotateToPlayer.transform.rotation, Quaternion.Euler(0, angle, 0), Time.deltaTime * _rotationSpeed);
         }
 
-        public void Damage(int value)
+        private void OnPlayerCaught()
         {
-            healthManager.Damage(value);
+          _distinationSet = false;
+        }
+
+        private void RespawnTimer()
+        {
+          if(dead)
+          {
+            _currentRespawnTimer -= Time.deltaTime;
+            if (_currentRespawnTimer <= 0)
+            {
+              RespawnEnemy();
+              _currentRespawnTimer = respawnTime;
+            }
+          }
         }
 
         private void SetRagdoll(bool value)

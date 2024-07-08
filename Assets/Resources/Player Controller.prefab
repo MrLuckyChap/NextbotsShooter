@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mechanicEnabled: 0
-  runSpeed: 4.3
+  runSpeed: 4
   walkSpeed: 2.5
   strafeSpeed: 3.5
   crouchSpeed: 3

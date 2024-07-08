@@ -34,19 +34,19 @@ namespace CodeBase.Infrastructure.States
     public void Enter(string sceneName)
     {
       _loadingCurtain.Show();
-      Debug.Log("Testing LoadLevelState Enter");
+      // Debug.Log("Testing LoadLevelState Enter");
       _sceneLoader.Load(sceneName, OnLoaded);
     }
 
     public void Exit()
     {
       _loadingCurtain.Hide();
-      Debug.Log("Testing LoadLevelState Exit");
+      // Debug.Log("Testing LoadLevelState Exit");
     }
 
     private async void OnLoaded()
     {
-      Debug.Log("Testing LoadLevelState OnLoaded Start");
+      // Debug.Log("Testing LoadLevelState OnLoaded Start");
       _dataService.Load();
       await InitGameWorld();
 
@@ -64,7 +64,7 @@ namespace CodeBase.Infrastructure.States
       InputManager inputManager = await InitInputManager();
       ItemManager itemManager = playerCamera.GetComponentInChildren<ItemManager>();
       GameObject gameHud = await InitGameHud();
-      await InitEnemies(aiSpawner);
+      await InitEnemies(aiSpawner, playerController.transform);
       await InitWeapons(aiSpawner, itemManager);
 
       playerController.inputManager = inputManager;
@@ -74,7 +74,7 @@ namespace CodeBase.Infrastructure.States
       playerCamera.GetComponentInChildren<CameraLook>().PlayerController = playerController;
       itemManager.playerController = playerController;
       itemManager.UIReference = uiManager;
-      Debug.Log("Testing LoadLevelState InitGameWorld Complete");
+      // Debug.Log("Testing LoadLevelState InitGameWorld Complete");
     }
 
 
@@ -92,7 +92,7 @@ namespace CodeBase.Infrastructure.States
       GameObject playerController = await _gameFactory.CreateGameObject(
         _dataService.AllLevelsData.PlayerController, spawnPoint,
         new Quaternion(0f, 0f, 0f, 0f));
-      // var transformPosition = playerController.transform.position;
+      // var transformPosition = playerTransform.transform.position;
       // transformPosition.y += 20f;
       return playerController.GetComponent<PlayerController>();
     }
@@ -100,13 +100,13 @@ namespace CodeBase.Infrastructure.States
     private async Task<GameObject> InitPlayerCamera(Vector3 playerPosition) => await _gameFactory.CreateGameObject(
       _dataService.AllLevelsData.PlayerCamera, playerPosition, new Quaternion(0f, 0f, 0f, 0f));
 
-    private async Task InitEnemies(AISpawner aiSpawner)
+    private async Task InitEnemies(AISpawner aiSpawner, Transform playerTransform)
     {
       for (int i = 0; i < _dataService.ForLevel(1).EnemyCount; i++)
       {
         var gameObject = _gameFactory.CreateGameObject(_dataService.ForLevel(1).Enemy[0], aiSpawner.GetPointForInstantiate(),
           new Quaternion(0f, 0f, 0f, 0f));
-        gameObject.Result.GetComponent<EnemyController>().Init(aiSpawner);
+        gameObject.Result.GetComponent<EnemyController>().Init(aiSpawner, playerTransform);
         await gameObject;
       }
 
@@ -159,6 +159,6 @@ namespace CodeBase.Infrastructure.States
      // ammo.GetComponent<PickupItem>().ItemManager = itemManager;
     }
 
-    // private void CameraFollow(GameObject player) => Camera.main.GetComponent<FirstPersonCamera>().Follow(player);
+    // private void CameraFollow(GameObject player) => Camera.main.GetComponent<FirstPersonCamera>().AgentMoveToPlayer(player);
   }
 }
