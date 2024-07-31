@@ -7,5 +7,8 @@ namespace CodeBase.Services.StaticData
     AllLevelsData AllLevelsData { get; }
     void Load();
     LevelData ForLevel(int level);
+    EnemiesData EnemiesData { get; }
+    AlliesData AlliesData { get; }
+    OtherObjectsData OtherObjectsData { get; }
   }
 }

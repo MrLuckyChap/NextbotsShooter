@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using All_Imported_Assets.AMFPC.Enemy.Scripts;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.PoolObject
@@ -13,6 +14,7 @@ namespace CodeBase.Infrastructure.PoolObject
 
         private readonly T _prefab;
         private readonly Transform _parent;
+        private readonly Vector3 _itemPosition;
 
         public MonoBehaviourPool(T prefab, Transform parent, int defaultCount = 4)
         {
@@ -25,6 +27,19 @@ namespace CodeBase.Infrastructure.PoolObject
             }
 
             UsedItems = new ReadOnlyCollection<T>(_usedItems);
+        }
+
+        public MonoBehaviourPool(T prefab, Vector3 itemPosition, int defaultCount = 4)
+        {
+          _prefab = prefab;
+          _itemPosition = itemPosition;
+
+          for (int i = 0; i < defaultCount; i++)
+          {
+            AddNewItemInPool();
+          }
+
+          UsedItems = new ReadOnlyCollection<T>(_usedItems);
         }
 
         public T Take()
@@ -79,7 +94,9 @@ namespace CodeBase.Infrastructure.PoolObject
 
         private void AddNewItemInPool()
         {
-            var newItem = Object.Instantiate(_prefab, _parent, false);
+            var newItem = _parent != null
+              ? Object.Instantiate(_prefab, _parent, true)
+              : Object.Instantiate(_prefab, _itemPosition, Quaternion.identity);
             newItem.gameObject.SetActive(false);
             _notUsedItems.Add(newItem);
         }

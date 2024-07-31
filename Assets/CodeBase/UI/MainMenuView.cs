@@ -1,6 +1,5 @@
+using System.Collections.Generic;
 using CodeBase.Services.Level;
-using CodeBase.Services.UI;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -11,14 +10,27 @@ namespace CodeBase.UI
   {
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _exitButton;
+    [SerializeField] private List<LevelButton> _levelButtons;
 
-    private IUIService _uiService;
     private ILevelService _levelService;
+    private int _currentLevel;
+
+    private void Awake()
+    {
+      _playButton.interactable = false;
+      foreach (LevelButton levelButton in _levelButtons)
+      {
+        levelButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+          _currentLevel = levelButton.Level;
+          _playButton.interactable = true;
+        });
+      }
+    }
 
     [Inject]
-    private void Constructor(IUIService uiService, ILevelService levelService)
+    private void Constructor(ILevelService levelService)
     {
-      _uiService = uiService;
       _levelService = levelService;
     }
 
@@ -30,7 +42,7 @@ namespace CodeBase.UI
 
     private void OnStartLevelButtonClicked()
     {
-      _levelService.StartLevel();
+      _levelService.StartLevel(_currentLevel);
     }
   }
 }

@@ -25,7 +25,7 @@ MonoBehaviour:
   holdAds: 1
   sniper: 0
   automaticFire: 0
-  aimAssistStrength: 30.9
+  aimAssistStrength: 0
   weaponDamage: 14
   maxMagazineSize: 30
   timeBetweenShots: 0.08

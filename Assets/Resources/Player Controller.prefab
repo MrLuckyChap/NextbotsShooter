@@ -69,12 +69,12 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 0.5
+  m_Height: 0.7
   m_Radius: 0.1
-  m_SlopeLimit: 45
-  m_StepOffset: 0.2
+  m_SlopeLimit: 90
+  m_StepOffset: 0.1
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3357520554129275615
 MonoBehaviour:
@@ -246,12 +246,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mechanicEnabled: 0
-  runSpeed: 4
-  walkSpeed: 2.5
-  strafeSpeed: 3.5
-  crouchSpeed: 3
-  crouchStrafeSpeed: 3
-  strafeControl: 0.304
+  runSpeed: 3.5
+  walkSpeed: 2
+  strafeSpeed: 3
+  crouchSpeed: 1.5
+  crouchStrafeSpeed: 1.5
+  strafeControl: 0.211
   speed: 0
   forceWalkSpeed: 0
   canRun: 0
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 941b516aecde77542bb4280fad5ca5c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallDamage: 27
+  fallDamage: 0
   fallDamageHeightThreshold: 5
 --- !u!114 &5311100845536657028
 MonoBehaviour:
@@ -386,9 +386,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mechanicEnabled: 0
-  crouchMode: 0
-  crouchingSpeed: 16.8
-  crouchHeight: 1
+  crouchMode: 1
+  crouchingSpeed: 10
+  crouchHeight: 0.21
 --- !u!114 &2255357987379290254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,7 +403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mechanicEnabled: 1
   airJumps: 1
-  jumpVelocity: 9
+  jumpVelocity: 3.5
   jumpWhileCrouching: 1
   jumpDirection: {x: 0, y: 0, z: 0}
   forceJump: 0

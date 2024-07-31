@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services.Level;
 using CodeBase.Services.StaticData;
+using CodeBase.Services.UI;
 using Zenject;
 
 namespace CodeBase.Infrastructure.States
@@ -13,13 +14,13 @@ namespace CodeBase.Infrastructure.States
     private IExitableState _activeState;
 
     public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory,
-      IStaticDataService dataService, ILevelService levelService)
+      IStaticDataService dataService, ILevelService levelService, IGameUIService gameUIService)
     {
       _states = new Dictionary<Type, IExitableState>
       {
         [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, loadingCurtain),
         [typeof(MenuState)] = new MenuState(this, sceneLoader, loadingCurtain, levelService),
-        [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, gameFactory, dataService),
+        [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, gameFactory, dataService, gameUIService),
         [typeof(GameState)] = new GameState(this, levelService),
       };
     }
@@ -39,6 +40,12 @@ namespace CodeBase.Infrastructure.States
     {
       TState state = ChangeState<TState>();
       state.Enter(payload);
+    }
+
+    public void Enter<TState, TPayload, TLevel>(TPayload payload, TLevel level) where TState : class, IPayloadedState<TPayload, TLevel>
+    {
+      TState state = ChangeState<TState>();
+      state.Enter(payload, level);
     }
 
     private TState ChangeState<TState>() where TState : class, IExitableState

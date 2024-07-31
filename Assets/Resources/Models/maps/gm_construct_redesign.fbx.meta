@@ -1,0 +1,569 @@
+fileFormatVersion: 2
+guid: 4d669376afcdc4fcdbf22ec916cdfa04
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BLACK
+    second: {fileID: 2100000, guid: 7f90a2e2e609544eda8b8da3abf7244e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BUILDING_TEMPLATE007F
+    second: {fileID: 2100000, guid: 9c5bfd7c0ceb54c64befc559a8dad5da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BUILDING_TEMPLATE007L
+    second: {fileID: 2100000, guid: 09b592a856e7c47ebb3985d35ad0147c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METALDOOR032C
+    second: {fileID: 2100000, guid: 284527b7b77c1422a9263d5e2a62697e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METALRAIL012C
+    second: {fileID: 2100000, guid: 2f0bd606ff28f424ab85720dc149f01a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: METALRAIL013A
+    second: {fileID: 2100000, guid: a23737662b90b4d4991739b33e0284a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_AD01
+    second: {fileID: 2100000, guid: 4eaf21942ec7a4d7492eb78a3a169788, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_AD02
+    second: {fileID: 2100000, guid: 39752377dbc614b8483351d4cf4156b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_BRICKWALL
+    second: {fileID: 2100000, guid: ff7fc392786ca42ffb1e47ffd085becd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_BRICKWALL2
+    second: {fileID: 2100000, guid: 8dc07fbaec75a40cba18aa77f0aaaf20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_BUILDING
+    second: {fileID: 2100000, guid: d8b31283204854083b867b5c77ae7438, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_BUILDING2
+    second: {fileID: 2100000, guid: b656875674c874156a7748e8ea1bd158, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_BUILDING3
+    second: {fileID: 2100000, guid: 159500ee846b848c78ac096959064adb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_BUILDING4
+    second: {fileID: 2100000, guid: 8cd11c72383c1447e8ef402088335113, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_BUILDING5
+    second: {fileID: 2100000, guid: 6879dc12a9e0e4b36b5a756fb012a8be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_CONCRETE
+    second: {fileID: 2100000, guid: 0fcb1db7f835645da8ab316b885f1e2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_CONCRETE2
+    second: {fileID: 2100000, guid: e89dc1727a9c5454284c114cc7b3cdd0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_CONCRETE3
+    second: {fileID: 2100000, guid: bd5391b4c83184691b7fa393b423860d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_CONCRETE4
+    second: {fileID: 2100000, guid: 0c2f78e4ca3c0467f8d0180684b440c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_CONCRETE5
+    second: {fileID: 2100000, guid: fc109f52a28fd4446a9d9eb0ed9e5226, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_CONCRETE6
+    second: {fileID: 2100000, guid: 9d4d2f8cad50047ecaa35189894d5407, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_CONCRETE7
+    second: {fileID: 2100000, guid: 60c94cd763e804271a7d8aae65b4d529, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_CONSTRUCTWALL
+    second: {fileID: 2100000, guid: edc502b5618bc4d8887dda30b9432c3b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_CONTAINER
+    second: {fileID: 2100000, guid: 05a8ee6c903c74fb4a284e3c9570a369, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_CONTAINER2
+    second: {fileID: 2100000, guid: d7b2dc33f8f3f4c47a16ebd7c86efb0c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_CONTAINER3_B
+    second: {fileID: 2100000, guid: 3d17a999c6c404d018251518a9e146d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_CONTAINER_B
+    second: {fileID: 2100000, guid: b3ec8aed34902443f977d77dc85fa627, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_CORCKBOARD
+    second: {fileID: 2100000, guid: 044b93d468b8648d4acb03a68887d080, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_DEBRIS
+    second: {fileID: 2100000, guid: 5bc1d0b2e9ad64e34a6913d6bb7a2784, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_DEV512A
+    second: {fileID: 2100000, guid: b09a310fc826c400383da30c28aef10e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_DIRT
+    second: {fileID: 2100000, guid: 8a9030afac16a4202bc2504bc2a8b6ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_DIRT_BLEND
+    second: {fileID: 2100000, guid: 1a0bc32eb325c40aeb7a4eb8c4f5c9ae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_DOOR
+    second: {fileID: 2100000, guid: 5adb2e1a1a8e145abb81cb08437a5769, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_DOOR3
+    second: {fileID: 2100000, guid: e0a717e55748846618d8c03be36132f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_DRAW001
+    second: {fileID: 2100000, guid: a1791efbe3cbf4830b7788befab9d088, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_DRAW002
+    second: {fileID: 2100000, guid: 8789760f886c54e67810a32dfee8111c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_DRAW003
+    second: {fileID: 2100000, guid: 04d95d6b8a905421f8b6316d2740e863, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_FACEPUNCH
+    second: {fileID: 2100000, guid: b58fdce3bd98044a3a03cbd046ec98a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_FAKEWATER
+    second: {fileID: 2100000, guid: a0e9635209e454e63a4ffdcabd3ab73d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_FLOOR
+    second: {fileID: 2100000, guid: e8410176d7f414720a0d86ddbb624532, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_FLOOR2
+    second: {fileID: 2100000, guid: c70a2710e9f0e47a5bad328a4fc2285e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_GRASS
+    second: {fileID: 2100000, guid: 4de589366cfdb48e192d585b6816c627, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_GRATE
+    second: {fileID: 2100000, guid: de50aa761f04544ae9b41dc96c329588, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_KITTY0706
+    second: {fileID: 2100000, guid: b04d4c86d919143e3abd288aa9b4efc8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_MARCI
+    second: {fileID: 2100000, guid: e4cf1772516884befabe7d794c8ddee3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_METAL
+    second: {fileID: 2100000, guid: cd7021224efef449283db6b2d00b64c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_METAL3
+    second: {fileID: 2100000, guid: 9e05eb23e7cbd493987d4b96072db7b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_METALBAR
+    second: {fileID: 2100000, guid: 30e80a170eb9247899c8437f58e43312, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_PACKAGE
+    second: {fileID: 2100000, guid: ecd9365bf0f654f7e8f634b605b40b76, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_PD16_2
+    second: {fileID: 2100000, guid: f7598a8389b7c410aba54c441c630573, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_PLASTERWALL
+    second: {fileID: 2100000, guid: c2f81c3573ffa40d985296c8ca90a54c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_PLASTERWALL2
+    second: {fileID: 2100000, guid: 3c0f28c152c6744abb77864a5663d95f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_RECORDER
+    second: {fileID: 2100000, guid: f929b48f026a24c47a2d47582e9b5471, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_ROAD
+    second: {fileID: 2100000, guid: 257592208fd5841dfb79341667794b9b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_ROCK_BLEND
+    second: {fileID: 2100000, guid: 7d7a3f40b4fda4eb6bb531694357ad37, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_ROOF
+    second: {fileID: 2100000, guid: 03bad2a81c1d94bc4b30f791b8514ce4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_SAND_BLEND
+    second: {fileID: 2100000, guid: 9548143c79c88441b96c79b62fb2c982, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_SKYBOX_TREE
+    second: {fileID: 2100000, guid: 9a13859066c45412e98353fd73d05adf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_SPORT
+    second: {fileID: 2100000, guid: 990ff5119860c434083b89c3e9bfa3cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_STORE
+    second: {fileID: 2100000, guid: 813eb151ef786411da0a0f55cd16e8ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_STORE2
+    second: {fileID: 2100000, guid: 30bc4f17f884248c8837cef6eca52247, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_TABLE
+    second: {fileID: 2100000, guid: 365f0d31555824d44850c57b4f79d8a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_TURUL
+    second: {fileID: 2100000, guid: b4a00dac08d4642e4acc6f26a523c7f1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_WALL
+    second: {fileID: 2100000, guid: d13e5443a80d34a268ef858da40e9979, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_WALL2
+    second: {fileID: 2100000, guid: e2d3be1f15d8f4a95b45529e0ccc1c13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SANDBOX_WHITE_ROOM
+    second: {fileID: 2100000, guid: bb41d2c1ffe114b7bbc5ce7a83c20c3f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SCENIC_1_ALPHA
+    second: {fileID: 2100000, guid: 5d80d4b91e96449acbac1103e7db0d5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SCENIC_2_ALPHA
+    second: {fileID: 2100000, guid: ea455401a878e4a7ba79710bce592e9f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SCENIC_3_ALPHA
+    second: {fileID: 2100000, guid: d337273af501c4b19a2f356603d497d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SCENIC_4_ALPHA
+    second: {fileID: 2100000, guid: 78eb87c0843074a6fb0a859bdbfbbd4a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SCENIC_5_ALPHA
+    second: {fileID: 2100000, guid: 3c2404a8b093e42c683d4bc39396185e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SCENIC_6_ALPHA
+    second: {fileID: 2100000, guid: 50238d37eb37d441ba3a90c57091e541, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TOOLSSKYBOX
+    second: {fileID: 2100000, guid: debdc05ce6900410fbb3219c0948f20c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WOODFLOOR005A
+    second: {fileID: 2100000, guid: dc8f90dd6823c49d5a61b401dddf7b3a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: building_template006b
+    second: {fileID: 2100000, guid: 9b59787f485f24dea8aceb9a66731e0e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: building_template007b
+    second: {fileID: 2100000, guid: c2040ead935ef4cec93ab9dc6cf51206, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: building_template007c
+    second: {fileID: 2100000, guid: b9696ba5b67c84b59829236fb826213d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: building_template007d
+    second: {fileID: 2100000, guid: 96d93a9535e9940eebd4c8350c7c572e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: building_template007h
+    second: {fileID: 2100000, guid: 98d8b032ef0d14da492975eec197eafc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: building_template007i
+    second: {fileID: 2100000, guid: c53147592a05f45c2b7a038fdaf589a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: building_template007j
+    second: {fileID: 2100000, guid: 92b5d84c0dcee4cdd943bd597cd2b5de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: building_template010b
+    second: {fileID: 2100000, guid: ae02db939331b4ec387b8f67de409f90, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: building_template010c
+    second: {fileID: 2100000, guid: 41fea323a509748ce9e3ad023180b7eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: building_template010g
+    second: {fileID: 2100000, guid: 3a215a6fb113e4cc6b97d9560dc7af05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: combineglass001a
+    second: {fileID: 2100000, guid: 3c893db89500347a3a881fd30091e224, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sandbox_elevator
+    second: {fileID: 2100000, guid: 4ebb814c9ea6c47209f796e0aaff6614, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sandbox_metal2
+    second: {fileID: 2100000, guid: dc93f0f46cf1c419da5c55eccff499e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sandbox_stonefloor
+    second: {fileID: 2100000, guid: ea69674c126d24e15b62a5865923f891, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: water
+    second: {fileID: 2100000, guid: a57f0f87596a94251b4b9727aff3db8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: water_beneath
+    second: {fileID: 2100000, guid: 28d02f4b6327c47a3aa99837ef6ec7fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: water_coast01_beneath
+    second: {fileID: 2100000, guid: 97ebef9c5ef7c476baff4b8414905983, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: water_coast03
+    second: {fileID: 2100000, guid: cfe1d96aa7f38450b88cce99a8d2b53a, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 1
+    materialSearch: 2
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

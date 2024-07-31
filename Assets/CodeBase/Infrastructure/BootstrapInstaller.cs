@@ -24,7 +24,7 @@ namespace CodeBase.Infrastructure
       Container.BindInterfacesAndSelfTo<GameFactory>().AsSingle();
       Container.BindInterfacesAndSelfTo<AssetProvider>().AsSingle();
       Container.BindInterfacesAndSelfTo<StaticDataService>().AsSingle();
-      Container.BindInterfacesAndSelfTo<UIService>().AsSingle();
+      Container.BindInterfacesAndSelfTo<GameGameUIService>().AsSingle();
       Container.BindInterfacesAndSelfTo<EnemyDeathService>().AsSingle();
       Container.BindInterfacesAndSelfTo<LevelService>().AsSingle();
     }

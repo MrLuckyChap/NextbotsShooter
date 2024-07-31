@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2dd3eb95f9c4e81b039f57992eb8359, type: 3}
+  m_Name: 2_Level
+  m_EditorClassIdentifier: 
+  LevelNumber: 2
+  Location: {fileID: 6479240515926746925, guid: 0d21dc1c12ff8430998e801977a6da46,
+    type: 3}
+  NavMeshData: {fileID: 23800000, guid: f77e096bad4b3493693cd06d7852cb86, type: 2}
+  EnemyCount: 20
+  AlliesCount: 0
+  PlayerCameraPosition: {x: 0, y: 0, z: 0}
+  Enemy:
+  - {fileID: 7348320078156870193, guid: f1330c46cc1b7452f9769a4ffb3f1533, type: 3}

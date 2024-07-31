@@ -7,33 +7,39 @@ using All_Imported_Assets.AMFPC.Interactables;
 using All_Imported_Assets.AMFPC.Player_Controller.Scripts;
 using All_Imported_Assets.AMFPC.UI.Scripts;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.PoolObject;
 using CodeBase.MovementGround;
 using CodeBase.Services.StaticData;
+using CodeBase.Services.UI;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
-  public class LoadLevelState : IPayloadedState<string>
+  public class LoadLevelState : IPayloadedState<string, int>
   {
     private readonly GameStateMachine _stateMachine;
     private readonly SceneLoader _sceneLoader;
     private readonly LoadingCurtain _loadingCurtain;
     private readonly IGameFactory _gameFactory;
     private readonly IStaticDataService _dataService;
+    private readonly IGameUIService _gameUIService;
+    private int _level;
 
     public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain loadingCurtain,
-      IGameFactory gameFactory, IStaticDataService dataService)
+      IGameFactory gameFactory, IStaticDataService dataService, IGameUIService gameUIService)
     {
       _stateMachine = gameStateMachine;
       _sceneLoader = sceneLoader;
       _loadingCurtain = loadingCurtain;
       _gameFactory = gameFactory;
       _dataService = dataService;
+      _gameUIService = gameUIService;
     }
 
-    public void Enter(string sceneName)
+    public void Enter(string sceneName, int level)
     {
       _loadingCurtain.Show();
+      _level = level;
       // Debug.Log("Testing LoadLevelState Enter");
       _sceneLoader.Load(sceneName, OnLoaded);
     }
@@ -56,7 +62,7 @@ namespace CodeBase.Infrastructure.States
     private async Task InitGameWorld()
     {
       GameObject level = await InitLocation();
-      level.GetComponent<Ground>().UpdateNavMesh(_dataService.ForLevel(1).NavMeshData);
+      level.GetComponent<Ground>().UpdateNavMesh(_dataService.ForLevel(_level).NavMeshData);
       AISpawner aiSpawner = level.GetComponent<AISpawner>();
       aiSpawner.Init();
       PlayerController playerController = await InitPlayer(aiSpawner);
@@ -66,24 +72,24 @@ namespace CodeBase.Infrastructure.States
       GameObject gameHud = await InitGameHud();
       await InitEnemies(aiSpawner, playerController.transform);
       await InitWeapons(aiSpawner, itemManager);
+      MonoBehaviourPool<EnemyController> enemyPool = _gameFactory.CreateEnemy2DPool(
+        _dataService.ForLevel(_level).Enemy[0].GetComponent<EnemyController>(), aiSpawner.GetPointForInstantiate(), 20);
+      DevModeSpawnPosition devModeSpawnPosition = playerCamera.GetComponent<DevModeSpawnPosition>();
+      _gameUIService.Init(aiSpawner, devModeSpawnPosition, playerController.transform, enemyPool);
 
+      // EnemyController pool = await 
       playerController.inputManager = inputManager;
       playerController.GetComponent<PlayerRespawn>().AISpawner = aiSpawner;
       UIManager uiManager = gameHud.GetComponentInChildren<UIManager>();
-      playerCamera.GetComponentInChildren<CameraRayCast>().UIReference = uiManager;
+      CameraRayCast cameraRayCast = playerCamera.GetComponentInChildren<CameraRayCast>();
+      cameraRayCast.UIReference = uiManager;
       playerCamera.GetComponentInChildren<CameraLook>().PlayerController = playerController;
       itemManager.playerController = playerController;
       itemManager.UIReference = uiManager;
       // Debug.Log("Testing LoadLevelState InitGameWorld Complete");
     }
 
-
-    // private void SetPlayerPosition(Vector3 spawnPosition)
-    // {
-    //   GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().transform.position = spawnPosition;
-    // }
-
-    private async Task<GameObject> InitLocation() => await _gameFactory.CreateGameObject(_dataService.ForLevel(1).Location);
+    private async Task<GameObject> InitLocation() => await _gameFactory.CreateGameObject(_dataService.ForLevel(_level).Location);
 
     private async Task<PlayerController> InitPlayer(AISpawner aiSpawner)
     {
@@ -102,17 +108,17 @@ namespace CodeBase.Infrastructure.States
 
     private async Task InitEnemies(AISpawner aiSpawner, Transform playerTransform)
     {
-      for (int i = 0; i < _dataService.ForLevel(1).EnemyCount; i++)
+      for (int i = 0; i < _dataService.ForLevel(_level).EnemyCount; i++)
       {
-        var gameObject = _gameFactory.CreateGameObject(_dataService.ForLevel(1).Enemy[0], aiSpawner.GetPointForInstantiate(),
+        var gameObject = _gameFactory.CreateGameObject(_dataService.ForLevel(_level).Enemy[0], aiSpawner.GetPointForInstantiate(),
           new Quaternion(0f, 0f, 0f, 0f));
         gameObject.Result.GetComponent<EnemyController>().Init(aiSpawner, playerTransform);
         await gameObject;
       }
 
-      // foreach (EnemySpawnPositions points in _dataService.ForLevel(1).EnemySpawnPositions)
+      // foreach (EnemySpawnPositions points in _dataService.ForLevel(_level).EnemySpawnPositions)
       //   foreach (Vector3 position in points.Positions)
-      //     await _gameFactory.CreateGameObjects(_dataService.ForLevel(1).Enemy, position, new Quaternion(0f, 180f, 0f, 0f));
+      //     await _gameFactory.CreateGameObjects(_dataService.ForLevel(_level).Enemy, position, new Quaternion(0f, 180f, 0f, 0f));
     }
 
     private async Task<InputManager> InitInputManager()
@@ -158,7 +164,5 @@ namespace CodeBase.Infrastructure.States
      //    new Quaternion(0f, 0f, 0f, 0f));
      // ammo.GetComponent<PickupItem>().ItemManager = itemManager;
     }
-
-    // private void CameraFollow(GameObject player) => Camera.main.GetComponent<FirstPersonCamera>().AgentMoveToPlayer(player);
   }
 }

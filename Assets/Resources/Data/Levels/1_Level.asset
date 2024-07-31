@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: 1_Level
   m_EditorClassIdentifier: 
   LevelNumber: 1
-  Location: {fileID: 7226675658014980731, guid: 95c2b67ca2673461ba8dfd627e5fd73b,
+  Location: {fileID: 3676049724011455361, guid: dc0018a93ce5f461bbb32f9dc3a74441,
     type: 3}
-  NavMeshData: {fileID: 23800000, guid: 785a509d5915348638f873a74e8f4c69, type: 2}
-  EnemyCount: 5
+  NavMeshData: {fileID: 23800000, guid: 1f262dfa13b874b0ab8cea7be13be2b8, type: 2}
+  EnemyCount: 20
   AlliesCount: 0
   PlayerCameraPosition: {x: 0, y: 0, z: 0}
   Enemy:

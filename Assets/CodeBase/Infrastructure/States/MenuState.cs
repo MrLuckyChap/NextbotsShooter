@@ -10,7 +10,7 @@ namespace CodeBase.Infrastructure.States
     private readonly LoadingCurtain _loadingCurtain;
     private readonly ILevelService _levelService;
     private string _gameSceneName;
-    private const string Game = "Game";
+    // private const string Game = "Game";
 
     public MenuState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain loadingCurtain,
       ILevelService levelService)
@@ -23,21 +23,21 @@ namespace CodeBase.Infrastructure.States
 
     public void Enter(string sceneName)
     {
-      Debug.Log($"Testing MenuState Enter sceneName {sceneName}");
+      // Debug.Log($"Testing MenuState Enter sceneName {sceneName}");
       _gameSceneName = sceneName;
       _levelService.PlayButtonClicked += OnPlayButtonClicked;
     }
 
     public void Exit()
     {
-      Debug.Log("Testing MenuState Exit sceneName");
+      // Debug.Log("Testing MenuState Exit sceneName");
       _levelService.PlayButtonClicked -= OnPlayButtonClicked;
     }
 
-    private void OnPlayButtonClicked()
+    private void OnPlayButtonClicked(int level)
     {
-      Debug.Log($"Testing MenuState OnPlayButtonClicked _gameSceneName {_gameSceneName}");
-      _stateMachine.Enter<LoadLevelState, string>(Game);
+      // Debug.Log($"Testing MenuState OnPlayButtonClicked _gameSceneName {_gameSceneName}");
+      _stateMachine.Enter<LoadLevelState, string, int>(_gameSceneName, level);
     }
   }
 }

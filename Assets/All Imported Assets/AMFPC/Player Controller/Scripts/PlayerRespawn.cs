@@ -23,6 +23,7 @@ namespace All_Imported_Assets.AMFPC.Player_Controller.Scripts
             _characterController.enabled = false;
             Vector3 spawnPoint = AISpawner.GetPointForInstantiate();
             spawnPoint.y += 1f;
+            // _playerController.transform.position = spawnPoint;
             _characterController.enabled = true;
             healthManager.RestoreHealth();
             _playerController.defaultMovement.mechanicEnabled = true;

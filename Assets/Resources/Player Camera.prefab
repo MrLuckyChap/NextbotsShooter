@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 8434669984335429800}
   - component: {fileID: 4040454906115244396}
   - component: {fileID: 3887136166256451637}
+  - component: {fileID: 4124290860839551133}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -189,14 +190,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d517f7c35be1a46986087360877e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactDistance: 3.31
-  rayRange: 100
+  interactDistance: 3.56
+  rayRange: 83
   raycastIgnoredLayers:
     serializedVersion: 2
-    m_Bits: 6144
+    m_Bits: 6148
   damageableDetected: 0
   interactableDetected: 0
   UIReference: {fileID: 0}
+--- !u!114 &4124290860839551133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783708973877255228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c3e36c7d5147f297a6193a121e62f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _devModeRaycastIgnoredLayers:
+    serializedVersion: 2
+    m_Bits: 22532
+  _devModeSpawnDistance: 5
 --- !u!1 &783708973972256268
 GameObject:
   m_ObjectHideFlags: 0

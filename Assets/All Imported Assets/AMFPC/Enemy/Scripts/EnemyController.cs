@@ -1,16 +1,21 @@
-﻿using All_Imported_Assets.AMFPC.Scripts;
+﻿using System;
+using All_Imported_Assets.AMFPC.Camera.Scripts;
+using All_Imported_Assets.AMFPC.Scripts;
 using CodeBase;
+using CodeBase.Infrastructure.PoolObject;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace All_Imported_Assets.AMFPC.Enemy.Scripts
 {
   public class EnemyController : MonoBehaviour
-    {
+  { 
+        public event Action<EnemyController> EnemyDied;
+
         public Animator animator;
         public float respawnTime;
         private float _currentRespawnTimer;
-        private NavMeshAgent _agent;
+        [HideInInspector] public NavMeshAgent _agent;
         private Vector3 _distination;
         private bool generatedPoint, _distinationSet;
         private float _targetDistance;
@@ -21,10 +26,13 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
         private Collider[] colliders;
         private AISpawner _aiSpawner;
         private Transform _playerTransform;
+        private bool _isDevModeSpawn;
         [SerializeField] private float _rotationSpeed;
         [SerializeField] private GameObject _objectRotateToPlayer;
         [SerializeField] private AgentMoveToPlayer _agentMoveToPlayer;
         [SerializeField] private Aggro _aggro;
+        [SerializeField] private BoxCollider _collisionCollider;
+        private MonoBehaviourPool<EnemyController> _enemyPool;
 
         private void Awake()
         {
@@ -89,38 +97,42 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
             }
         }
 
-        public void GenerateDestinationPoint()
-        {
-            if(!generatedPoint)
-            {
-                _distination = _aiSpawner.GetPointForInstantiate();
-                generatedPoint = true;
-                _distinationSet = false;
-            }
-        }
-
         public void KillEnemy()
         {
-            _agent.destination = transform.position;
+          if (_isDevModeSpawn)
+          {
+            _enemyPool.Release(this);
+          }
+          else
+          {
             dead = true;
             gameObject.SetActive(false);
-            // GetComponent<CapsuleCollider>().enabled = false;
-            SetRagdoll(true);
-            animator.enabled = false;
+          }
+
+          _agent.destination = transform.position;
+          // GetComponent<CapsuleCollider>().enabled = false;
+          SetRagdoll(true);
+          animator.enabled = false;
         }
 
-        public void RespawnEnemy()
+        public void SetValuesFromUISpawn(Vector3 colliderSize, MonoBehaviourPool<EnemyController> enemyPool,
+          AISpawner aiSpawner, DevModeSpawnPosition devModeSpawnPosition, Transform playerTransform)
         {
-            animator.enabled = true;
-            gameObject.SetActive(true);
-            // SetRagdoll(false);
-            dead = false;
-            healthManager.RestoreHealth();
-            generatedPoint = false;
-            transform.position = _aiSpawner.GetPointForInstantiate();
-            // GetComponent<CapsuleCollider>().enabled = true;
-            healthManager.RestoreHealth();
-            enemyStats.UpdateEnemyHealthUI();
+          _isDevModeSpawn = true;
+          _collisionCollider.size = colliderSize;
+          _enemyPool = enemyPool;
+          _agent.Warp(devModeSpawnPosition.GetDevModeAgentSpawnPoint());
+          Init(aiSpawner, playerTransform);
+        }
+
+        private void GenerateDestinationPoint()
+        {
+          if(!generatedPoint)
+          {
+            _distination = _aiSpawner.GetPointForInstantiate();
+            generatedPoint = true;
+            _distinationSet = false;
+          }
         }
 
         private void LookAtPlayer()
@@ -148,6 +160,20 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
           }
         }
 
+        private void RespawnEnemy()
+        {
+          animator.enabled = true;
+          gameObject.SetActive(true);
+          // SetRagdoll(false);
+          dead = false;
+          healthManager.RestoreHealth();
+          generatedPoint = false;
+          transform.position = _aiSpawner.GetPointForInstantiate();
+          // GetComponent<CapsuleCollider>().enabled = true;
+          healthManager.RestoreHealth();
+          enemyStats.UpdateEnemyHealthUI();
+        }
+
         private void SetRagdoll(bool value)
         {
             foreach (Rigidbody rb in rigidBodies)
@@ -166,5 +192,5 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
                 col.enabled = value;
             }
         }
-    }
+  }
 }

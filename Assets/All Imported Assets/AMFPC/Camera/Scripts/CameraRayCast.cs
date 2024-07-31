@@ -28,10 +28,12 @@ namespace All_Imported_Assets.AMFPC.Camera.Scripts
         private void Update()
         {
             RaycastFront();
-            SetInteractUI();
+            // SetInteractUI();
         }
+
         public void RaycastFront()
         {
+            //todo: outside from update
             Ray ray = _camera.ViewportPointToRay(_rayPosition);
             if (Physics.Raycast(ray, out hit, rayRange, ~raycastIgnoredLayers))
             {

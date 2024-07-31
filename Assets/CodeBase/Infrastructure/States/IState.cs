@@ -9,6 +9,11 @@ namespace CodeBase.Infrastructure.States
   {
     void Enter(TPayload payload);
   }
+
+  public interface IPayloadedState<TPayload, TLevel> : IExitableState
+  {
+    void Enter(TPayload payload, TLevel level);
+  }
   
   public interface IExitableState
   {
