@@ -16,7 +16,7 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
         public float respawnTime;
         private float _currentRespawnTimer;
         [HideInInspector] public NavMeshAgent _agent;
-        private Vector3 _distination;
+        private Vector3 _destination;
         private bool generatedPoint, _distinationSet;
         private float _targetDistance;
         [HideInInspector] public bool dead;
@@ -42,6 +42,11 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
             _agentMoveToPlayer.PlayerCaught += OnPlayerCaught;
             _aggro.PlayerEscaped += OnPlayerCaught;
             // SetRagdoll(false);
+            
+            enemyStats = GetComponent<EnemyStats>();
+            healthManager = GetComponent<HealthManager>();
+            _agent = GetComponent<NavMeshAgent>();
+            _currentRespawnTimer = respawnTime;
         }
 
         public void Init(AISpawner aiSpawner, Transform playerTransform)
@@ -49,14 +54,6 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
             _aiSpawner = aiSpawner;
             _playerTransform = playerTransform;
             _agentMoveToPlayer.Init(playerTransform);
-        }
-
-        private void Start()
-        {
-            enemyStats = GetComponent<EnemyStats>();
-            healthManager = GetComponent<HealthManager>();
-            _agent = GetComponent<NavMeshAgent>();
-            _currentRespawnTimer = respawnTime;
         }
 
         private void Update()
@@ -80,10 +77,10 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
         {
             if(generatedPoint)
             {
-                _targetDistance = Vector3.Distance(_distination, transform.position);
+                _targetDistance = Vector3.Distance(_destination, transform.position);
                 if (!_distinationSet)
                 {
-                    _agent.destination = _distination;
+                    _agent.destination = _destination;
                     _distinationSet = true;
                 }
                 if (_targetDistance < 2)
@@ -129,7 +126,7 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
         {
           if(!generatedPoint)
           {
-            _distination = _aiSpawner.GetPointForInstantiate();
+            _destination = _aiSpawner.GetPointForInstantiate();
             generatedPoint = true;
             _distinationSet = false;
           }

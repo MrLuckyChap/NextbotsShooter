@@ -74,7 +74,7 @@ namespace CodeBase.Infrastructure.States
       await InitWeapons(aiSpawner, itemManager);
       MonoBehaviourPool<EnemyController> enemyPool = _gameFactory.CreateEnemy2DPool(
         _dataService.ForLevel(_level).Enemy[0].GetComponent<EnemyController>(), aiSpawner.GetPointForInstantiate(), 20);
-      DevModeSpawnPosition devModeSpawnPosition = playerCamera.GetComponent<DevModeSpawnPosition>();
+      DevModeSpawnPosition devModeSpawnPosition = playerCamera.GetComponentInChildren<DevModeSpawnPosition>();
       _gameUIService.Init(aiSpawner, devModeSpawnPosition, playerController.transform, enemyPool);
 
       // EnemyController pool = await 
