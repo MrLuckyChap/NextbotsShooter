@@ -24,10 +24,10 @@ MonoBehaviour:
   weaponType: 0
   holdAds: 1
   sniper: 0
-  automaticFire: 1
-  aimAssistStrength: 31.6
+  automaticFire: 0
+  aimAssistStrength: 0
   weaponDamage: 15
-  maxMagazineSize: 25
+  maxMagazineSize: 15
   timeBetweenShots: 0.22
   reloadDuration: 1.8
   ammunitionType: {fileID: 11400000, guid: 60c67a9cfe208694a8baa66bdb69fc04, type: 2}

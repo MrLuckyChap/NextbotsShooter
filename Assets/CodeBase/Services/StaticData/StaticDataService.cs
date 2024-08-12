@@ -12,7 +12,7 @@ namespace CodeBase.Services.StaticData
     public OtherObjectsData OtherObjectsData => _otherObjectsData;
     public AllLevelsData AllLevelsData => _allLevels;
 
-    private const string LevelsDataPath = "Data/Levels";
+    private const string LevelsDataPath = "Data/Maps";
     private const string AllLevelsDataPath = "Data/AllLevelsData";
     private const string EnemiesDataPath = "Data/EnemiesData";
     private const string AlliesDataPath = "Data/AlliesData";

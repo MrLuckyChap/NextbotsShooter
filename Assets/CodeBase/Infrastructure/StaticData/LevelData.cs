@@ -16,6 +16,7 @@ namespace CodeBase.Infrastructure.StaticData
     // public NavMeshData NavMeshData;
     public int EnemyCount;
     public int AlliesCount;
+    public int WeaponCount;
     public Vector3 PlayerCameraPosition;
     public List<GameObject> Enemy;
   }

@@ -21,3 +21,4 @@ MonoBehaviour:
   GameHud: {fileID: 2611663746014033752, guid: 34167e250ee80b9449911899cc7cc843, type: 3}
   AK47: {fileID: 2401729316576802488, guid: d1fbd3586f03f4c5bb665984ccb93c3d, type: 3}
   Shotgun: {fileID: 5072859047127142812, guid: 7663c3d6defe34d14b90e1340833ae6c, type: 3}
+  Pistol: {fileID: 7218013390271403267, guid: cba422d46c0dffd408cf913afbe92d69, type: 3}

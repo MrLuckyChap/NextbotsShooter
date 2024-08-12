@@ -25,8 +25,6 @@ namespace All_Imported_Assets.AMFPC.Interactables
 
         private void Awake()
         {
-
-
           _triggerObserver.TriggerEnter += TriggerEnter;
         }
 

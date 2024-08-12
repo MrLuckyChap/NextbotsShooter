@@ -31,7 +31,7 @@ namespace CodeBase.Services.UI
 
     public void SpawnUIClickedObject(EntityData entityData)
     {
-      if (entityData.Type == SpawnType.Enemy)
+      if (entityData.Type == EntityType.Enemy)
       {
         EnemyController enemyController = _enemyPool.Take();
         enemyController.SetValuesFromUISpawn(entityData.Special.ColliderSize, _enemyPool, _aiSpawner, _devModeSpawnPosition, _playerTransform);

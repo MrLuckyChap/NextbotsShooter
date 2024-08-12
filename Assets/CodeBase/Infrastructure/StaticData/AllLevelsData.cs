@@ -11,6 +11,7 @@ namespace CodeBase.Infrastructure.StaticData
     public GameObject GameHud;
     public GameObject AK47;
     public GameObject Shotgun;
+    public GameObject Pistol;
     
   }
 }

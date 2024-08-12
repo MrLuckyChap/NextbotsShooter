@@ -8,6 +8,7 @@ using All_Imported_Assets.AMFPC.Player_Controller.Scripts;
 using All_Imported_Assets.AMFPC.UI.Scripts;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.PoolObject;
+using CodeBase.Infrastructure.StaticData;
 using CodeBase.MovementGround;
 using CodeBase.Services.StaticData;
 using CodeBase.Services.UI;
@@ -71,9 +72,9 @@ namespace CodeBase.Infrastructure.States
       ItemManager itemManager = playerCamera.GetComponentInChildren<ItemManager>();
       GameObject gameHud = await InitGameHud();
       await InitEnemies(aiSpawner, playerController.transform);
-      await InitWeapons(aiSpawner, itemManager);
+      await InitWeapons(aiSpawner, itemManager, playerController.transform.position);
       MonoBehaviourPool<EnemyController> enemyPool = _gameFactory.CreateEnemy2DPool(
-        _dataService.ForLevel(_level).Enemy[0].GetComponent<EnemyController>(), aiSpawner.GetPointForInstantiate(), 20);
+        _dataService.ForLevel(_level).Enemy[0].GetComponent<EnemyController>(), aiSpawner.GetNavMeshRandomPoint(), 20);
       DevModeSpawnPosition devModeSpawnPosition = playerCamera.GetComponentInChildren<DevModeSpawnPosition>();
       _gameUIService.Init(aiSpawner, devModeSpawnPosition, playerController.transform, enemyPool);
 
@@ -93,7 +94,7 @@ namespace CodeBase.Infrastructure.States
 
     private async Task<PlayerController> InitPlayer(AISpawner aiSpawner)
     {
-      Vector3 spawnPoint = aiSpawner.GetPointForInstantiate();
+      Vector3 spawnPoint = aiSpawner.GetNavMeshRandomPoint();
       spawnPoint.y += 1f;
       GameObject playerController = await _gameFactory.CreateGameObject(
         _dataService.AllLevelsData.PlayerController, spawnPoint,
@@ -110,7 +111,7 @@ namespace CodeBase.Infrastructure.States
     {
       for (int i = 0; i < _dataService.ForLevel(_level).EnemyCount; i++)
       {
-        var gameObject = _gameFactory.CreateGameObject(_dataService.ForLevel(_level).Enemy[0], aiSpawner.GetPointForInstantiate(),
+        var gameObject = _gameFactory.CreateGameObject(_dataService.ForLevel(_level).Enemy[0], aiSpawner.GetNavMeshRandomPointFromEntityAreas(EntityType.Enemy),
           new Quaternion(0f, 0f, 0f, 0f));
         gameObject.Result.GetComponent<EnemyController>().Init(aiSpawner, playerTransform);
         await gameObject;
@@ -132,37 +133,37 @@ namespace CodeBase.Infrastructure.States
       return await _gameFactory.CreateGameObject(_dataService.AllLevelsData.GameHud);
     }
 
-    private async Task InitWeapons(AISpawner aiSpawner, ItemManager itemManager)
+    private async Task InitWeapons(AISpawner aiSpawner, ItemManager itemManager, Vector3 playerPosition)
     {
      GameObject weapon = await _gameFactory.CreateGameObject(
-        _dataService.AllLevelsData.AK47, aiSpawner.GetPointForInstantiate(),
+        _dataService.AllLevelsData.AK47, aiSpawner.GetNavMeshRandomPoint(),
         new Quaternion(0f, 0f, 0f, 0f));
      weapon.GetComponentInChildren<PickupItem>().ItemManager = itemManager;
      
      GameObject weapon1 = await _gameFactory.CreateGameObject(
-       _dataService.AllLevelsData.AK47, aiSpawner.GetPointForInstantiate(),
+       _dataService.AllLevelsData.AK47, aiSpawner.GetNavMeshRandomPoint(),
        new Quaternion(0f, 0f, 0f, 0f));
      weapon1.GetComponentInChildren<PickupItem>().ItemManager = itemManager;
      
      GameObject weapon2 = await _gameFactory.CreateGameObject(
-       _dataService.AllLevelsData.AK47, aiSpawner.GetPointForInstantiate(),
+       _dataService.AllLevelsData.AK47, aiSpawner.GetNavMeshRandomPoint(),
        new Quaternion(0f, 0f, 0f, 0f));
      weapon2.GetComponentInChildren<PickupItem>().ItemManager = itemManager;
      
      GameObject weapon3 = await _gameFactory.CreateGameObject(
-       _dataService.AllLevelsData.Shotgun, aiSpawner.GetPointForInstantiate(),
+       _dataService.AllLevelsData.Shotgun, aiSpawner.GetNavMeshRandomPoint(),
        new Quaternion(0f, 0f, 0f, 0f));
      weapon3.GetComponentInChildren<PickupItem>().ItemManager = itemManager;
      
      GameObject weapon4 = await _gameFactory.CreateGameObject(
-       _dataService.AllLevelsData.Shotgun, aiSpawner.GetPointForInstantiate(),
+       _dataService.AllLevelsData.Shotgun, aiSpawner.GetNavMeshRandomPoint(),
        new Quaternion(0f, 0f, 0f, 0f));
      weapon4.GetComponentInChildren<PickupItem>().ItemManager = itemManager;
      
-     // GameObject ammo = await _gameFactory.CreateGameObject(
-     //    _dataService.AllLevelsData.AKAmmo, aiSpawner.GetPointForInstantiate(),
-     //    new Quaternion(0f, 0f, 0f, 0f));
-     // ammo.GetComponent<PickupItem>().ItemManager = itemManager;
+     GameObject weapon5 = await _gameFactory.CreateGameObject(
+       _dataService.AllLevelsData.Pistol, playerPosition,
+       new Quaternion(0f, 0f, 0f, 0f));
+     weapon5.GetComponentInChildren<PickupItem>().ItemManager = itemManager;
     }
   }
 }
