@@ -34,9 +34,9 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
         [SerializeField] private BoxCollider _collisionCollider;
         private MonoBehaviourPool<EnemyController> _enemyPool;
 
-        private float idleTime = 0f; // Время простоя
-        private float maxIdleTime = 5f; // Максимальное время простоя до смены цели
-        private float movementThreshold = 0.1f; // Порог скорости, чтобы считать, что агент движется
+        private float idleTime = 0f; 
+        private float maxIdleTime = 5f; 
+        private float movementThreshold = 0.1f; 
 
         private Vector3 lastPosition;
         
@@ -47,7 +47,7 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
 
             _agentMoveToPlayer.PlayerCaught += OnPlayerCaught;
             _aggro.PlayerEscaped += OnPlayerCaught;
-            // SetRagdoll(false);
+            
             
             enemyStats = GetComponent<EnemyStats>();
             healthManager = GetComponent<HealthManager>();
@@ -75,23 +75,23 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
               Chase();
               LookAtPlayer();
             }
-            // Проверяем, движется ли агент
+            
             if (IsAgentMoving())
             {
-              // Если агент движется, сбрасываем idleTime
+              
               idleTime = 0f;
             }
             else
             {
-              // Если агент не движется, увеличиваем idleTime
+              
               idleTime += Time.deltaTime;
             
-              // Если агент стоит более 5 секунд, сменить цель
+              
               if (idleTime >= maxIdleTime)
               {
                 Debug.Log("Агент стоял на месте слишком долго. Меняем цель.");
                 generatedPoint = false;
-                idleTime = 0f; // Сбрасываем таймер
+                idleTime = 0f; 
               }
             }
             RespawnTimer();
@@ -99,10 +99,10 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
         }
         private bool IsAgentMoving()
         {
-          // Проверяем, изменяется ли позиция агента
+          
           float distanceMoved = Vector3.Distance(transform.position, lastPosition);
         
-          // Если движение больше порога, агент движется
+          
           return distanceMoved > movementThreshold;
         }
         public void Chase()
@@ -139,7 +139,7 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
           }
 
           _agent.destination = transform.position;
-          // GetComponent<CapsuleCollider>().enabled = false;
+          
           SetRagdoll(true);
           animator.enabled = false;
         }
@@ -193,12 +193,12 @@ namespace All_Imported_Assets.AMFPC.Enemy.Scripts
         {
           animator.enabled = true;
           gameObject.SetActive(true);
-          // SetRagdoll(false);
+          
           dead = false;
           healthManager.RestoreHealth();
           generatedPoint = false;
           transform.position = _aiSpawner.GetNavMeshRandomPoint();
-          // GetComponent<CapsuleCollider>().enabled = true;
+          
           healthManager.RestoreHealth();
           enemyStats.UpdateEnemyHealthUI();
         }
